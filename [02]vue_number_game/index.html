@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+	<div id="app">
+		<div>{{first}} 곱하기 {{last}} ?</div>
+		<form v-on:submit='onSubmit'>
+			<input type='number' ref='inputNum' v-model='value' />
+			<button>입력</button>
+			<div v-if='ishide'>{{value}}</div>
+		</form>
+		<div>{{result}}</div>
+	</div>
+	<script>
+		var app = new Vue({
+			el : '#app',
+			data : {
+				first : Math.ceil(Math.random() * 9),
+				last : Math.ceil(Math.random() * 9),
+				value : '',
+				result : '',
+				ishide : false
+			},
+			methods:{
+				onSubmit(e){
+					e.preventDefault();
+					let numberResult = this.first * this.last;
+					if(numberResult === parseInt(this.value)){
+						this.result = '딩동댕';
+						this.first = Math.ceil(Math.random() * 9);
+						this.last = Math.ceil(Math.random() * 9);
+						this.value = '';
+						this.$refs.inputNum.focus();
+						this.ishide = false;
+					}else{
+						this.result = '땡';
+						this.value = '';
+						this.$refs.inputNum.focus();
+						this.ishide = true;
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>

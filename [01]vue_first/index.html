@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+	<div id="app">
+		<p>
+			Hi {{user}}
+		</p>
+		<div v-if='user == "Jin"'>
+			<span v-bind:title='tag[0].hash'>#Mr</span>
+			<span>#Front-end</span>
+			<span>#Seoul</span>
+			<div>
+				<span ref='answer' v-bind:title='tagMsg.hash' v-for='tagMsg in tag'>
+					#{{tagMsg.hash}}
+				</span>
+			</div>
+		</div>
+		<div v-else>
+			add your hashTag
+		</div>
+	</div>
+	<script>
+		let app = new Vue({
+			el : '#app',
+			data : {
+				user : 'Jin',
+				tag : [
+					{hash : 'Mr'},
+					{hash : 'Front-end'},
+					{hash : 'Seoul'},
+				],
+			}
+		})
+	</script>
+</body>
+</html>
